@@ -1,4 +1,4 @@
-var wordsList = ["leonard"];
+var wordsList = ["leonard", "suyun", "subin", "inae"];
 var chosenWord = "";
 var dashes = [];
 var wrongGuesses = [];
@@ -30,7 +30,7 @@ startGame = function() {
     document.getElementById("wordblanks").innerHTML= dashes.join(" ");
 }
 
-//checkLetters will take a key, 
+//checkLetters will take a key, then update the array dashes. 
 function checkLetters(key) {
 	var inWord = true;
 	//Going to create all the dashes first
@@ -39,22 +39,20 @@ function checkLetters(key) {
             dashes[i] = key;
             console.log(dashes);
         } 
+        document.getElementById("wordblanks").innerHTML= dashes.join(" ");
     }
-
-    
 
     if (dashes.includes(key) == false){
     	guesses--;
     	console.log("guesses" + guesses);
     	wrongGuesses.push(key);
+    	document.getElementById("wrongGuesses").innerHTML = wrongGuesses.join(" ");
+    	document.getElementById("guessesLeft").innerHTML = guesses;
     }
-
-    
-    document.getElementById("wordblanks").innerHTML= dashes.join(" ");
-    document.getElementById("guessesLeft").innerHTML = guesses;
-    document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
-    document.getElementById("winCounter").innerHTML = wins;
 }
+
+
+//this function updates the screen with whatever the variables are at that time;
 
 
 function roundComplete() {
@@ -69,6 +67,8 @@ function roundComplete() {
 
     	alert("You Win!");
     	wins++;
+    	document.getElementById("winCounter").innerHTML = wins;
+    	startGame();
     }
 }
 
@@ -84,6 +84,6 @@ document.onkeyup = function(event) {
     // Runs the code to check for correct guesses.
     checkLetters(letterGuessed);
 
-    // Runs the code that ends each round.
     roundComplete();
+
 }
